@@ -1,0 +1,64 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by title"
+        [(ngModel)]="title"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchTitle()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>taches List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let tache of taches; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActivetache(tache, i)"
+      >
+        {{ tache.title }}
+      </li>
+    </ul>
+
+    <button class="m-3 btn btn-sm btn-danger" (click)="removeAlltaches()">
+      Remove All
+    </button>
+    <a routerLink="../add" class="btn btn-sm btn-success">Add</a>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currenttache.id">
+      <h4>tache</h4>
+      <div>
+        <label><strong>Title:</strong></label> {{ currenttache.title }}
+      </div>
+      <div>
+        <label><strong>Description:</strong></label>
+        {{ currenttache.description }}
+      </div>
+      <div>
+        <label><strong>Etat:</strong></label>
+        {{ currenttache.etat }}
+      </div>
+
+      <a class="badge badge-warning" routerLink="/taches/{{ currenttache.id }}">
+        Edit
+      </a>
+    </div>
+
+    <div *ngIf="!currenttache">
+      <br />
+      <p>Please click on a tache...</p>
+    </div>
+  </div>
+</div>
